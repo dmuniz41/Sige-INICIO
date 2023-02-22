@@ -1,10 +1,10 @@
-import Icon from "../../assets/inicio.svg";
+import inicio from "../../assets/inicio.svg";
 
 const LoginScreen = () => {
   return (
     <div className="login_main">
       <div className="login_logo">
-        <img src={Icon} alt="React Logo" />
+        <img src={inicio} alt="logo" />
       </div>
       <div className="login_box_container">
         <h5 className="login_label">Nombre de Usuario</h5>

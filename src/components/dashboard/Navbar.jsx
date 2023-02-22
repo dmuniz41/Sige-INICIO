@@ -1,17 +1,28 @@
-import Icon from "../../assets/inicio.svg";
+import { IoMdMenu } from "react-icons/io";
+import { MdKeyboardArrowDown } from "react-icons/md";
+import { useProSidebar } from "react-pro-sidebar";
+import userImg from "../../assets/dani.jpg";
 
 const Navbar = () => {
-  const user = "Daniel Muniz";
+  const user = "Daniel Muñiz";
+  const { collapseSidebar } = useProSidebar();
   return (
     <div className="navbar">
-      <div className="navbar_logo">
-        <img src={Icon} alt="icon" />
-      </div>
+      <button className="collapse_btn" onClick={() => collapseSidebar()}>
+        <IoMdMenu />
+      </button>
       <div className="navbar_main_nav">
         <ul>
           <li className="navbar_main_nav_item">
-            <img src="" alt="userImg" />
+            <img src={userImg} alt="userImg" />
             <span>{user}</span>
+
+            <button className="user_dropdown collapse_btn">
+              <MdKeyboardArrowDown className="dropdown_icon" />
+              <div className="dropdown-content">
+                <p>Hello</p>
+              </div>
+            </button>
           </li>
         </ul>
       </div>
