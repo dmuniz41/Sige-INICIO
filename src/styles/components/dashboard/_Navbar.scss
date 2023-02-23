@@ -1,0 +1,24 @@
+.navbar {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  height: 4rem;
+}
+
+.navbar_logo {
+  width: 10%;
+  height: 100%;
+  padding: 1rem;
+  align-items: center;
+  justify-content: center;
+}
+.navbar_main_nav {
+  display: flex;
+  align-items: center;
+  justify-content: flex-end;
+  background-color: $primary;
+  width: 90%;
+  height: 100%;
+  // border-bottom: 100px solid transparent;
+  // border-left: 75px solid white;
+}

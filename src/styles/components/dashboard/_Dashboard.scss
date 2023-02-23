@@ -1,0 +1,11 @@
+.dashboard_wrapper {
+  display: flex;
+  height: calc(100vh - 4rem); //Altura del Navbar
+}
+.dashboard_main {
+  display: flex;
+  width: 100%;
+  align-items: center;
+  justify-content: center;
+  background-color: #e7e7e7;
+}
