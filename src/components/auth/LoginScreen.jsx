@@ -1,19 +1,39 @@
+import { useDispatch } from "react-redux";
 import inicio from "../../assets/inicio.svg";
+import { useForm } from "../../hooks/useForm";
+import { login } from "../../actions/auth";
 
 const LoginScreen = () => {
+  const dispatch = useDispatch();
+
+  const [formValues, handleInputChange] = useForm({
+    userName: "Daniel",
+    password: "1234578",
+  });
+
+  const { userName, password } = formValues;
+  console.log(userName);
+
+  const handleLogin = (e) => {
+    e.preventDefault();
+    dispatch(login("12312312", userName));
+  };
+
   return (
     <div className="login_main">
       <div className="login_logo">
         <img src={inicio} alt="logo" />
       </div>
-      <div className="login_box_container">
+      <form className="login_box_container" onSubmit={handleLogin}>
         <h5 className="login_label">Nombre de Usuario</h5>
         <input
           className="login_input"
           autoFocus
           type="text"
-          name="user"
+          name="userName"
           id="input_user"
+          value={userName}
+          onChange={handleInputChange}
         />
         <h5 className="login_label">Contraseña</h5>
         <input
@@ -21,9 +41,11 @@ const LoginScreen = () => {
           type="password"
           name="password"
           id="input_password"
+          value={password}
+          onChange={handleInputChange}
         />
         <button className="login_btn">ENTRAR</button>
-      </div>
+      </form>
       <p className="login_footer">Copyright © INICIO-TEAM 2022</p>
     </div>
   );
