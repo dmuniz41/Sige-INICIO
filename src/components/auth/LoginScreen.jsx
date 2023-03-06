@@ -12,11 +12,10 @@ const LoginScreen = () => {
   });
 
   const { userName, password } = formValues;
-  console.log(userName);
 
   const handleLogin = (e) => {
     e.preventDefault();
-    dispatch(login("12312312", userName));
+    dispatch(login(userName));
   };
 
   return (

@@ -1,12 +1,10 @@
-import { types } from "../types/types"
+import { types } from "../types/types";
 
-
-export const login = (uid, userName)=>{
-  return{
+export const login = (userName) => {
+  return {
     type: types.login,
     payload: {
-      uid,
       userName,
-    }
-  }
-}
+    },
+  };
+};
