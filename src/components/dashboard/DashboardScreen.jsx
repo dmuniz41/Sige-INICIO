@@ -16,8 +16,7 @@ import { FaProjectDiagram } from "react-icons/fa";
 import inicio from "../../assets/inicio.svg";
 
 const DashboardScreen = () => {
-  const { collapseSidebar, toggleSidebar, collapsed, toggled, broken, rtl } =
-    useProSidebar();
+  const { collapsed } = useProSidebar();
 
   return (
     <div className="dashboard_wrapper">
@@ -31,7 +30,11 @@ const DashboardScreen = () => {
                 width: "100%",
               }}
             >
-              <img src={inicio} alt="inicioLogo" />
+              {collapsed ? (
+                <span>INICIO</span>
+              ) : (
+                <img src={inicio} alt="inicioLogo" />
+              )}
             </MenuItem>
             <SubMenu label="Seguridad" icon={<MdLock />}>
               <MenuItem> Usuarios </MenuItem>
