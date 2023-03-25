@@ -1,11 +1,6 @@
+import { Link, Outlet } from "react-router-dom";
 import Navbar from "./Navbar";
-import {
-  Sidebar,
-  Menu,
-  MenuItem,
-  SubMenu,
-  useProSidebar,
-} from "react-pro-sidebar";
+import { Sidebar, Menu, MenuItem, SubMenu, useProSidebar } from "react-pro-sidebar";
 import { MdLock } from "react-icons/md";
 import { MdPeople } from "react-icons/md";
 import { IoMdDocument } from "react-icons/io";
@@ -30,46 +25,44 @@ const DashboardScreen = () => {
                 width: "100%",
               }}
             >
-              {collapsed ? (
-                <span>INICIO</span>
-              ) : (
-                <img src={inicio} alt="inicioLogo" />
-              )}
+              {collapsed ? <span>INICIO</span> : <img src={inicio} alt="inicioLogo" />}
             </MenuItem>
             <SubMenu label="Seguridad" icon={<MdLock />}>
-              <MenuItem> Usuarios </MenuItem>
+              <MenuItem component={<Link to="user" />}> Usuarios </MenuItem>
             </SubMenu>
             <SubMenu label="Nomencladores" icon={<IoMdSettings />}>
-              <MenuItem> Área </MenuItem>
-              <MenuItem> Unidad de Medida </MenuItem>
-              <MenuItem> Proveedores </MenuItem>
-              <MenuItem> Categoría del producto </MenuItem>
-              <MenuItem> Variación del producto </MenuItem>
-              <MenuItem> Estado de la contratación </MenuItem>
-              <MenuItem> Contratación </MenuItem>
-              <MenuItem> Cliente </MenuItem>
-              <MenuItem> Tarifas </MenuItem>
-              <MenuItem> Configuración de gastos </MenuItem>
-              <MenuItem> Estado del proyecto </MenuItem>
-              <MenuItem> Actividades </MenuItem>
-              <MenuItem> Subcontrataciones </MenuItem>
-              <MenuItem> Cargos </MenuItem>
+              <MenuItem component={<Link to="area" />}> Área </MenuItem>
+              <MenuItem component={<Link to="unitmeasure" />}> Unidad de Medida </MenuItem>
+              <MenuItem component={<Link to="supplier" />}> Proveedores </MenuItem>
+              <MenuItem component={<Link to="product_category" />}>Categoría del producto</MenuItem>
+              <MenuItem component={<Link to="product_variation" />}>Variación del producto</MenuItem>
+              <MenuItem component={<Link to="hiring_stages" />}>Estado de la contratación</MenuItem>
+              <MenuItem component={<Link to="hiring" />}> Contratación </MenuItem>
+              <MenuItem component={<Link to="client" />}> Cliente </MenuItem>
+              <MenuItem component={<Link to="price_rates" />}> Tarifas </MenuItem>
+              <MenuItem component={<Link to="expense" />}> Configuración de gastos </MenuItem>
+              <MenuItem component={<Link to="proyect_state" />}> Estado del proyecto </MenuItem>
+              <MenuItem component={<Link to="activity" />}> Actividades </MenuItem>
+              <MenuItem component={<Link to="subcontract" />}> Subcontrataciones </MenuItem>
+              <MenuItem component={<Link to="roles" />}> Cargos </MenuItem>
             </SubMenu>
             <SubMenu label="Recursos Humanos" icon={<MdPeople />}>
-              <MenuItem> Trabajador </MenuItem>
+              <MenuItem component={<Link to="worker" />}> Trabajador </MenuItem>
             </SubMenu>
             <SubMenu label="Oficina" icon={<HiOfficeBuilding />}>
-              <MenuItem> Gastos de oficina </MenuItem>
+              <MenuItem component={<Link to="office_expenses" />}> Gastos de oficina </MenuItem>
             </SubMenu>
             <SubMenu label="Almacén" icon={<FaWarehouse />}>
-              <MenuItem> Almacén </MenuItem>
-              <MenuItem> Almacén de vales </MenuItem>
+              <MenuItem component={<Link to="warehouse" />}> Almacén </MenuItem>
+              <MenuItem component={<Link to="tickets_warehouse" />}> Almacén de vales </MenuItem>
             </SubMenu>
             <SubMenu label="Proyecto" icon={<FaProjectDiagram />}>
-              <MenuItem> Proyectos </MenuItem>
-              <MenuItem> Gastos de proyectos </MenuItem>
+              <MenuItem component={<Link to="projects" />}> Proyectos </MenuItem>
+              <MenuItem component={<Link to="project_expenses" />}> Gastos de proyectos </MenuItem>
             </SubMenu>
-            <MenuItem icon={<IoMdDocument />}> Reportes </MenuItem>
+            <MenuItem component={<Link to="reports" />} icon={<IoMdDocument />}>
+              Reportes
+            </MenuItem>
           </Menu>
         </Sidebar>
       </div>
@@ -78,6 +71,7 @@ const DashboardScreen = () => {
         {/* DASHBOARD MAIN CONTENT */}
         <div className="dashboard_main">
           <span>Main Content</span>
+          <Outlet />
         </div>
       </div>
     </div>
