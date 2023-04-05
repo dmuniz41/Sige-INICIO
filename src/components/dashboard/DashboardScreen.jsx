@@ -70,7 +70,7 @@ const DashboardScreen = () => {
         <Navbar />
         {/* DASHBOARD MAIN CONTENT */}
         <div className="dashboard_main">
-          <span>Main Content</span>
+          <span></span>
           <Outlet />
         </div>
       </div>
