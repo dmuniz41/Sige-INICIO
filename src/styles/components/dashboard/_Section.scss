@@ -1,0 +1,106 @@
+.section_wrapper {
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+  width: 100%;
+  height: 100%;
+  padding: 1rem;
+}
+
+.section_header {
+  display: flex;
+  width: 100%;
+  min-height: 3.5rem;
+  justify-content: space-between;
+  align-items: center;
+  padding: 1rem;
+  border-radius: 3px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.03);
+  background-color: #fff;
+  margin: 0 auto;
+}
+
+.section_body {
+  display: flex;
+  flex-direction: column;
+  padding: 1px;
+}
+
+.section_table {
+  display: flex;
+  flex-direction: column;
+}
+
+.section_top_toolbar {
+  display: flex;
+  width: 100%;
+  min-height: 3.5rem;
+  justify-content: space-between;
+  padding: 1rem;
+  align-items: center;
+  border-radius: 3px;
+  background-color: #fff;
+}
+
+.section_data_table {
+  width: 100%;
+  height: 100%;
+}
+
+.section_header h1 {
+  font-size: x-large;
+  font-weight: 700;
+}
+
+.breadcrumb {
+  font-size: small;
+}
+
+.top_toolbar_action {
+  display: flex;
+}
+
+.top_toolbar_search form {
+  display: flex;
+  justify-content: flex-end;
+}
+
+.top_toolbar_search input {
+  height: 2.3rem;
+  width: 15rem;
+  border-radius: 5px 0 0 5px;
+  border: 1px solid rgba(0, 0, 0, 0.219);
+  border-right: transparent;
+  padding-left: 10px;
+}
+
+.top_toolbar_search button {
+  height: 2.3rem;
+  width: 3rem;
+  border: none;
+  background-color: $primary;
+  padding-top: 5px;
+  color: white;
+  border-radius: 0 5px 5px 0;
+  cursor: pointer;
+}
+
+.toolbar_btn {
+  padding-top: 4px;
+  display: flex;
+  width: 36px;
+  height: 36px;
+  border-radius: 36px;
+  justify-content: center;
+  align-items: center;
+  background-color: transparent;
+  transition: background-color 0.5s;
+}
+.toolbar_btn * {
+  color: $icon_color;
+  font-size: large;
+}
+
+.toolbar_btn:hover {
+  background-color: darken($color: white, $amount: 10);
+}
