@@ -1,6 +1,8 @@
 import React from "react";
 import { useSortBy, useTable } from "react-table";
 import { ScopedCssBaseline, Table, TableBody, TableCell, TableHead, TableRow } from "@mui/material";
+import { MdArrowUpward } from "react-icons/md/";
+import { MdArrowDownward } from "react-icons/md/";
 
 export const DataTable = ({ data, columns }) => {
   // Crear la instancia de la tabla
@@ -17,8 +19,13 @@ export const DataTable = ({ data, columns }) => {
             <TableRow {...headerGroup.getHeaderGroupProps()}>
               {headerGroup.headers.map((column) => (
                 <TableCell {...column.getHeaderProps(column.getSortByToggleProps())}>
-                  {column.render("Header")}
-                  <span> {column.isSorted ? (column.isSortedDesc ? " 🔽" : " 🔼") : ""} </span>
+                  <div style={{ display: "flex", alignItems: "center", gap: "0.5rem" }}>
+                    {column.render("Header")}
+                    <div style={{ marginTop: "5px", fontSize: "medium" }}>
+                      {" "}
+                      {column.isSorted ? column.isSortedDesc ? <MdArrowDownward /> : <MdArrowUpward /> : ""}{" "}
+                    </div>
+                  </div>
                 </TableCell>
               ))}
             </TableRow>
