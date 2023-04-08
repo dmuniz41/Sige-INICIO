@@ -104,3 +104,11 @@
 .toolbar_btn:hover {
   background-color: darken($color: white, $amount: 10);
 }
+
+.section_data_table {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 100%;
+  height: 100%;
+}
