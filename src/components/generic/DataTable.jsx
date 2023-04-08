@@ -1,10 +1,10 @@
 import React from "react";
-import { useTable } from "react-table";
+import { useSortBy, useTable } from "react-table";
 import { ScopedCssBaseline, Table, TableBody, TableCell, TableHead, TableRow } from "@mui/material";
 
 export const DataTable = ({ data, columns }) => {
   // Crear la instancia de la tabla
-  const usersTable = useTable({ columns, data });
+  const usersTable = useTable({ columns, data }, useSortBy);
 
   // Obtiene las propiedades de la tabla
   const { getTableProps, getTableBodyProps, headerGroups, rows, prepareRow } = usersTable;
@@ -16,7 +16,10 @@ export const DataTable = ({ data, columns }) => {
           {headerGroups.map((headerGroup) => (
             <TableRow {...headerGroup.getHeaderGroupProps()}>
               {headerGroup.headers.map((column) => (
-                <TableCell {...column.getHeaderProps()}>{column.render("Header")}</TableCell>
+                <TableCell {...column.getHeaderProps(column.getSortByToggleProps())}>
+                  {column.render("Header")}
+                  <span> {column.isSorted ? (column.isSortedDesc ? " 🔽" : " 🔼") : ""} </span>
+                </TableCell>
               ))}
             </TableRow>
           ))}
