@@ -1,7 +1,7 @@
 import React from "react";
 import { mockUsersData } from "../../mockData/mockData";
 import { useMemo } from "react";
-import { Table } from "../generic/Table";
+import { DataTable } from "../generic/DataTable";
 
 export const UsersTable = () => {
   const data = useMemo(() => mockUsersData, []);
@@ -38,7 +38,7 @@ export const UsersTable = () => {
 
   return (
     <>
-      <Table data={data} columns={columns} />
+      <DataTable data={data} columns={columns} />
     </>
   );
 };
