@@ -16,3 +16,21 @@
   justify-content: center;
   background-color: $background_light;
 }
+.menuItem {
+  color: rgba(0, 0, 0, 0.54);
+  font-size: x-large;
+}
+
+.dashboard_logo {
+  width: 12rem;
+  margin-top: 1.5rem;
+  margin-left: 2rem;
+}
+.dashboard_collapsed_logo {
+  padding: 1rem;
+  margin-top: 1rem;
+  margin-left: 0.5rem;
+  color: rgba(0, 0, 0, 0.54);
+  font-size: large;
+  font-weight: bolder;
+}
