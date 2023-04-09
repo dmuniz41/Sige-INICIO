@@ -4,6 +4,10 @@ import { ScopedCssBaseline, Table, TableBody, TableCell, TableHead, TableRow } f
 import { MdArrowUpward } from "react-icons/md/";
 import { MdArrowDownward } from "react-icons/md/";
 
+// ! TODO: Eliminar overflow de la tabla haciendo la paginacion
+// ! TODO: Implementar la funcion de seleccionar elementos en la tabla
+// ! TODO: Implementar la funcion de buscar
+
 export const DataTable = ({ data, columns }) => {
   // Crear la instancia de la tabla
   const usersTable = useTable({ columns, data }, useSortBy);
@@ -22,8 +26,7 @@ export const DataTable = ({ data, columns }) => {
                   <div style={{ display: "flex", alignItems: "center", gap: "0.5rem" }}>
                     {column.render("Header")}
                     <div style={{ marginTop: "5px", fontSize: "medium" }}>
-                      {" "}
-                      {column.isSorted ? column.isSortedDesc ? <MdArrowDownward /> : <MdArrowUpward /> : ""}{" "}
+                      {column.isSorted ? column.isSortedDesc ? <MdArrowDownward /> : <MdArrowUpward /> : ""}
                     </div>
                   </div>
                 </TableCell>

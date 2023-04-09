@@ -11,7 +11,6 @@ import { FaProjectDiagram } from "react-icons/fa";
 import inicio from "../../assets/inicio.svg";
 
 const DashboardScreen = () => {
-  // cont menuItemStyle
   const { collapsed } = useProSidebar();
 
   return (
@@ -76,7 +75,6 @@ const DashboardScreen = () => {
         <Navbar />
         {/* DASHBOARD MAIN CONTENT */}
         <div className="dashboard_main">
-          <span></span>
           <Outlet />
         </div>
       </div>
