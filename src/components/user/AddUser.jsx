@@ -2,6 +2,8 @@ import React from "react";
 import { SectionHeder } from "../generic/SectionHeder";
 import { useForm } from "../../hooks/useForm";
 
+// ! TODO: Arreglar los selcets para que sean multiples y vayan mostrando las opciones seleccionadas en tiempo real
+
 export const AddUser = () => {
   const [formValues, handleInputChange] = useForm({
     user: "",

@@ -9,7 +9,7 @@ export const ListOfUsers = ({ currentPath }) => {
       {/* Header de la pantalla de usuarios */}
       <SectionHeder title="Listado de Usuarios" currentPath={currentPath} />
       <div className="section_body">
-        <div className="section_table">
+        <div className="section_table_wrapper">
           {/* Toolbar de la tabla de usuarios */}
           <UserTopToolbar />
           <div className="section_data_table">

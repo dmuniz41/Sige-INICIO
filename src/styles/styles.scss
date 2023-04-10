@@ -1,10 +1,14 @@
 @import "./base/settings";
 @import "./base/base";
 
-// Components
+// Estilos del login
 @import "./components/auth/LoginScreen";
+// Estilos del dashboard
 @import "./components/dashboard/Navbar";
 @import "./components/dashboard/Sidebar";
 @import "./components/dashboard/Dashboard";
 @import "./components/dashboard/Section";
+// Estilos de componentes globales
 @import "./components/global/FormStyles";
+@import "./components/global/SectionHeader";
+@import "./components/global/SectionTopToolbar";
