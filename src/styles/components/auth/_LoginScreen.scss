@@ -37,6 +37,10 @@
   font-size: 15px;
   padding-left: 10px;
 }
+.login_input:focus {
+  outline: 0.5px solid $primary;
+  border: 0.5px solid transparent;
+}
 .login_btn {
   background-color: $primary;
   border-radius: 5px;
