@@ -12,18 +12,9 @@ export const AddUser = () => {
     area: "",
   });
 
-  const { user, userName, lastName, privileges, state, area } = formValues;
+  const { user, userName, lastName, privileges, password, area } = formValues;
 
   const HandleSubmit = (e) => {
-    console.log(
-      "🚀 ~ file: AddUser.jsx:16 ~ AddUser ~ user, userName, lastName, privileges, state, area:",
-      user,
-      userName,
-      lastName,
-      privileges,
-      state,
-      area
-    );
     return e.preventDefault();
   };
 
@@ -45,13 +36,22 @@ export const AddUser = () => {
             <input type="text" id="lastName" name="lastName" value={lastName} onChange={handleInputChange} required />
           </div>
           <div className="form_input">
-            <label htmlFor="privileges">Privilegios *</label>
-            <input type="text" id="privileges" name="privileges" value={privileges} onChange={handleInputChange} required />
+            <label htmlFor="password">Contraseña *</label>
+            <input type="text" id="password" name="password" value={password} onChange={handleInputChange} required />
           </div>
           <div className="form_input">
-            <label htmlFor="state">Estado *</label>
-            <input type="text" id="state" name="state" value={state} onChange={handleInputChange} required />
+            <label htmlFor="privileges">Privilegios *</label>
+            <select id="privileges" className="form_select" name="privileges" value={privileges} onChange={handleInputChange} required>
+              <option value="ROLE_ADMIN">ADMIN</option>
+              <option value="ROLE_COMMERCIAL ">COMMERCIAL</option>
+              <option value="ROLE_USER">USER</option>
+              <option value="ROLE_HR">HR</option>
+              <option value="ROLE_PROYECT">PROYECT</option>
+              <option value="ROLE_WAREHOUSE">WAREHOUSE</option>
+              <option value="ROLE_OFFICE">OFFICE</option>
+            </select>
           </div>
+
           <div className="form_input">
             <label htmlFor="area">Área *</label>
             <select id="area" className="form_select" name="area" value={area} onChange={handleInputChange} required>
