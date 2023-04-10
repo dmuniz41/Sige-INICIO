@@ -3,7 +3,7 @@ import React from "react";
 import { ListOfUsers } from "./ListOfUsers";
 import { Routes, Route } from "react-router-dom";
 import { AddUser } from "./AddUser";
-import { EditUser } from "./Edituser";
+import { EditUser } from "./EditUser";
 
 export const UserScreen = () => {
   // ! TODO: Añadir path para el breadcrumb
