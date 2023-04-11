@@ -2,11 +2,20 @@ import { IoMdMenu, IoMdSettings } from "react-icons/io";
 import { MdKeyboardArrowDown, MdOutlineLogout } from "react-icons/md";
 import { useProSidebar } from "react-pro-sidebar";
 import userImg from "../../assets/dani.jpg";
-import { Link } from "react-router-dom";
+import { useDispatch } from "react-redux";
+import { logout } from "../../actions/auth";
 
 const Navbar = () => {
-  const user = "Daniel Muñiz";
+  const dispatch = useDispatch();
   const { collapseSidebar } = useProSidebar();
+
+  const user = "Daniel Muñiz";
+
+  const handleLogout = () => {
+    console.log("logout");
+    dispatch(logout());
+  };
+
   return (
     <div className="navbar">
       <button className="collapse_btn" onClick={() => collapseSidebar()}>
@@ -18,7 +27,7 @@ const Navbar = () => {
             <img src={userImg} alt="userImg" />
             <span>{user}</span>
 
-            <button className="user_dropdown collapse_btn">
+            <div className="user_dropdown collapse_btn">
               <MdKeyboardArrowDown className="dropdown_icon" />
               <div className="dropdown-content">
                 <div className="dropdown_item">
@@ -26,11 +35,13 @@ const Navbar = () => {
                   <span>Configuración</span>
                 </div>
                 <div className="dropdown_item">
-                  <MdOutlineLogout className="dropdown_item_icon" />
-                  <span>Salir</span>
+                  <button onClick={handleLogout}>
+                    <MdOutlineLogout className="dropdown_item_icon" />
+                    Salir
+                  </button>
                 </div>
               </div>
-            </button>
+            </div>
           </li>
         </ul>
       </div>

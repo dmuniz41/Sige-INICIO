@@ -6,7 +6,7 @@ import { PublicRoutes } from "../components/auth/PublicRoutes";
 import { useSelector } from "react-redux";
 import { UserScreen } from "../components/user/UserScreen";
 
-// ! TODO: Mantener la persisitencia de la autenticación
+// TODO
 
 export const AppRouter = () => {
   const { logged } = useSelector((state) => state.auth);
