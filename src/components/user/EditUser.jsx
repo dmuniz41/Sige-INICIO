@@ -1,10 +1,13 @@
 import React from "react";
 import { SectionHeder } from "../generic/SectionHeder";
 import { useForm } from "../../hooks/useForm";
+import { useNavigate } from "react-router-dom";
 
 // ! TODO: Arreglar los selcets para que sean multiples y vayan mostrando las opciones seleccionadas en tiempo real
 
 export const EditUser = () => {
+  const navigate = useNavigate();
+
   const [formValues, handleInputChange] = useForm({
     user: "",
     userName: "",
@@ -17,6 +20,7 @@ export const EditUser = () => {
   const { user, userName, lastName, privileges, password, area } = formValues;
 
   const HandleSubmit = (e) => {
+    navigate(-1);
     return e.preventDefault();
   };
 
@@ -63,7 +67,14 @@ export const EditUser = () => {
             </select>
           </div>
           <div className="form_action">
-            <button className="form_btn_cancel">Cancelar</button>
+            <button
+              className="form_btn_cancel"
+              onClick={() => {
+                navigate(-1);
+              }}
+            >
+              Cancelar
+            </button>
             <button type="submit" className="form_btn_save">
               Editar
             </button>

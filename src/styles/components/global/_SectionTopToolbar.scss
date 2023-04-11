@@ -27,6 +27,11 @@
   padding-left: 10px;
 }
 
+.top_toolbar_search input:focus {
+  outline: 0.5px solid $primary;
+  border: 0.5px solid transparent;
+}
+
 .top_toolbar_search button {
   height: 2.3rem;
   width: 3rem;
