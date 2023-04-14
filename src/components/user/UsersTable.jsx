@@ -1,10 +1,18 @@
-import React from "react";
-import { mockUsersData } from "../../mockData/mockData";
+import React, { useEffect, useState } from "react";
 import { useMemo } from "react";
 import { DataTable } from "../generic/DataTable";
+import { useDispatch, useSelector } from "react-redux";
+import { usersStartLoading } from "../../actions/auth";
 
 export const UsersTable = () => {
-  const data = useMemo(() => mockUsersData, []);
+  const dispatch = useDispatch();
+  const { users } = useSelector((state) => state.auth);
+
+  const data = useMemo(() => users, []);
+
+  useEffect(() => {
+    dispatch(usersStartLoading());
+  }, [dispatch]);
 
   const columns = React.useMemo(
     () => [
@@ -15,7 +23,7 @@ export const UsersTable = () => {
       },
       {
         Header: "Nombre",
-        accessor: "name",
+        accessor: "userName",
         sortType: "basic",
       },
       {
@@ -28,11 +36,11 @@ export const UsersTable = () => {
         accessor: "privileges",
         sortType: "basic",
       },
-      {
-        Header: "Estado",
-        accessor: "state",
-        sortType: "basic",
-      },
+      // {
+      //   Header: "Estado",
+      //   accessor: "state",
+      //   sortType: "basic",
+      // },
       {
         Header: "Área",
         accessor: "area",

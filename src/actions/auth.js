@@ -68,3 +68,17 @@ export const updateUser = (user, userName, lastName, privileges, password, area,
     }
   };
 };
+
+export const usersStartLoading = () => {
+  return async (dispatch) => {
+    const resp = await fetchConToken(`auth/`, "GET");
+    const body = await resp.json();
+
+    dispatch(usersLoaded(body.listOfUsers));
+  };
+};
+
+const usersLoaded = (users) => ({
+  type: types.usersLoaded,
+  payload: users,
+});
