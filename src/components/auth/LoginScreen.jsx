@@ -1,20 +1,20 @@
 import { useDispatch } from "react-redux";
 import inicio from "../../assets/inicio.svg";
 import { useForm } from "../../hooks/useForm";
-import { login } from "../../actions/auth";
+import { startLogin } from "../../actions/auth";
 
 const LoginScreen = () => {
   const dispatch = useDispatch();
 
   const [formValues, handleInputChange] = useForm({
     userName: "Daniel",
-    password: "1234578",
+    password: "132456",
   });
 
   const { userName, password } = formValues;
 
   const handleLogin = (e) => {
-    dispatch(login(userName));
+    dispatch(startLogin(userName, password));
     e.preventDefault();
   };
 

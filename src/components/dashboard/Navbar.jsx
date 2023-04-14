@@ -12,7 +12,6 @@ const Navbar = () => {
   const user = "Daniel Muñiz";
 
   const handleLogout = () => {
-    console.log("logout");
     dispatch(logout());
   };
 
