@@ -82,14 +82,14 @@ export const AddUser = () => {
             </select>
           </div>
           <div className="form_action">
-            <button
+            <div
               className="form_btn_cancel"
               onClick={() => {
                 navigate(-1);
               }}
             >
-              Cancelar
-            </button>
+              <span>Cancelar</span>
+            </div>
             <button type="submit" className="form_btn_save">
               Crear
             </button>

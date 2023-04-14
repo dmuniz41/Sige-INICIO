@@ -59,6 +59,17 @@ select {
 }
 
 .form_btn_cancel {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 5.5rem;
+  height: 3rem;
+  border-radius: 5px;
+  border: 0px solid $border_input;
+  font-weight: 800;
+  font-size: 15px;
+  cursor: pointer;
+  transition: background-color 0.5s;
   background-color: rgb(226, 77, 77);
   color: white;
 }
