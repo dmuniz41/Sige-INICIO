@@ -2,26 +2,30 @@ import React from "react";
 import { SectionHeder } from "../generic/SectionHeder";
 import { useForm } from "../../hooks/useForm";
 import { useNavigate } from "react-router-dom";
+import { useDispatch } from "react-redux";
+import { updateUser } from "../../actions/auth";
 
 // ! TODO: Arreglar los selcets para que sean multiples y vayan mostrando las opciones seleccionadas en tiempo real
 
 export const EditUser = () => {
+  const dispatch = useDispatch();
   const navigate = useNavigate();
 
   const [formValues, handleInputChange] = useForm({
-    user: "",
-    userName: "",
-    lastName: "",
-    privileges: "",
-    state: "",
-    area: "",
+    user: "dmuniz",
+    userName: "Daniel",
+    lastName: "Muniz",
+    privileges: "ROLE_ADMIN",
+    password: "123456",
+    password2: "123456",
+    area: "INICIO",
   });
 
-  const { user, userName, lastName, privileges, password, area } = formValues;
+  const { user, userName, lastName, privileges, password, area, password2 } = formValues;
 
   const HandleSubmit = (e) => {
-    navigate(-1);
-    return e.preventDefault();
+    e.preventDefault();
+    dispatch(updateUser(user, userName, lastName, privileges, password, area, password2));
   };
 
   return (
@@ -46,6 +50,10 @@ export const EditUser = () => {
             <input type="text" id="password" name="password" value={password} onChange={handleInputChange} required />
           </div>
           <div className="form_input">
+            <label htmlFor="password">Confirmar Contraseña *</label>
+            <input type="text" id="password2" name="password2" value={password2} onChange={handleInputChange} required />
+          </div>
+          <div className="form_input">
             <label htmlFor="privileges">Privilegios *</label>
             <select id="privileges" className="form_select" name="privileges" value={privileges} onChange={handleInputChange} required>
               <option value="ROLE_ADMIN">ADMIN</option>
@@ -67,14 +75,14 @@ export const EditUser = () => {
             </select>
           </div>
           <div className="form_action">
-            <button
+            <div
               className="form_btn_cancel"
               onClick={() => {
                 navigate(-1);
               }}
             >
-              Cancelar
-            </button>
+              <span>Cancelar</span>
+            </div>
             <button type="submit" className="form_btn_save">
               Editar
             </button>

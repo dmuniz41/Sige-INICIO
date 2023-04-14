@@ -1,5 +1,5 @@
 import Swal from "sweetalert2";
-import { fetchSinToken } from "../../helpers/fetch";
+import { fetchConToken, fetchSinToken } from "../../helpers/fetch";
 import { types } from "../types/types";
 
 const login = (userName) => {
@@ -36,9 +36,22 @@ export const startLogin = (userName, password) => {
   };
 };
 
-export const startRegister = (user, userName, lastName, privileges, password, area, password2) => {
-  return async (dispatch) => {
-    const resp = await fetchSinToken("auth/new", { user, userName, lastName, privileges, password, area, password2 }, "POST");
+export const addUser = (user, userName, lastName, privileges, password, area, password2) => {
+  return async () => {
+    const resp = await fetchConToken("auth/new", { user, userName, lastName, privileges, password, area, password2 }, "POST");
+    const body = await resp.json();
+
+    if (body.ok) {
+      Swal.fire("", body.msg, "success");
+    } else {
+      Swal.fire("Error", body.msg, "error");
+    }
+  };
+};
+
+export const updateUser = (user, userName, lastName, privileges, password, area, password2) => {
+  return async () => {
+    const resp = await fetchConToken(`auth/${user}`, { user, userName, lastName, privileges, password, area, password2 }, "PUT");
     const body = await resp.json();
 
     if (body.ok) {

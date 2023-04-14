@@ -4,7 +4,7 @@ import { useForm } from "../../hooks/useForm";
 import { useNavigate } from "react-router-dom";
 import Swal from "sweetalert2";
 import { useDispatch } from "react-redux";
-import { startRegister } from "../../actions/auth";
+import { addUser } from "../../actions/auth";
 
 // ! TODO: Arreglar los selcets para que sean multiples y vayan mostrando las opciones seleccionadas en tiempo real
 
@@ -32,7 +32,7 @@ export const AddUser = () => {
       return;
     }
 
-    dispatch(startRegister(user, userName, lastName, privileges, password, area, password2));
+    dispatch(addUser(user, userName, lastName, privileges, password, area, password2));
   };
 
   return (
