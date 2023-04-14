@@ -2,33 +2,44 @@ import React from "react";
 import { SectionHeder } from "../generic/SectionHeder";
 import { useForm } from "../../hooks/useForm";
 import { useNavigate } from "react-router-dom";
+import Swal from "sweetalert2";
+import { useDispatch } from "react-redux";
+import { startRegister } from "../../actions/auth";
 
 // ! TODO: Arreglar los selcets para que sean multiples y vayan mostrando las opciones seleccionadas en tiempo real
 
 export const AddUser = () => {
+  const dispatch = useDispatch();
   const navigate = useNavigate();
 
   const [formValues, handleInputChange] = useForm({
-    user: "",
-    userName: "",
-    lastName: "",
-    privileges: "",
-    state: "",
-    area: "",
+    user: "dmuniz",
+    userName: "Daniel",
+    lastName: "Muniz",
+    privileges: "ROLE_ADMIN",
+    password: "123456",
+    password2: "123456",
+    area: "INICIO",
   });
 
-  const { user, userName, lastName, privileges, password, area } = formValues;
+  const { user, userName, lastName, privileges, password, area, password2 } = formValues;
 
-  const HandleSubmit = (e) => {
-    navigate(-1);
-    return e.preventDefault();
+  const HandleRegister = (e) => {
+    e.preventDefault();
+
+    if (password !== password2) {
+      Swal.fire("Error", "Las contraseñas deben ser iguales", "error");
+      return;
+    }
+
+    dispatch(startRegister(user, userName, lastName, privileges, password, area, password2));
   };
 
   return (
     <>
       <SectionHeder title="Crear Usuario" currentPath="Usuarios" />
       <div className="form_wrapper">
-        <form className="form" onSubmit={HandleSubmit}>
+        <form className="form" onSubmit={HandleRegister}>
           <div className="form_input">
             <label htmlFor="user">Usuario *</label>
             <input type="text" id="user" name="user" value={user} onChange={handleInputChange} required />
@@ -44,6 +55,10 @@ export const AddUser = () => {
           <div className="form_input">
             <label htmlFor="password">Contraseña *</label>
             <input type="text" id="password" name="password" value={password} onChange={handleInputChange} required />
+          </div>
+          <div className="form_input">
+            <label htmlFor="password">Confirmar Contraseña *</label>
+            <input type="text" id="password2" name="password2" value={password2} onChange={handleInputChange} required />
           </div>
           <div className="form_input">
             <label htmlFor="privileges">Privilegios *</label>

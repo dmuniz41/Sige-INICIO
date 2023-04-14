@@ -1,4 +1,4 @@
-import { Route, Routes } from "react-router-dom";
+import { Navigate, Route, Routes } from "react-router-dom";
 import LoginScreen from "../components/auth/LoginScreen";
 import DashboardScreen from "../components/dashboard/DashboardScreen";
 import { PrivateRoutes } from "../components/auth/PrivateRoutes";
@@ -38,6 +38,7 @@ export const AppRouter = () => {
             <Route path="project_expenses/*" element={<UserScreen />} />
             <Route path="reports/*" element={<UserScreen />} />
           </Route>
+          <Route path="*" element={<Navigate to="/dashboard" />} />
         </Route>
         <Route element={<PublicRoutes IsLogged={logged} />}>
           <Route path="/login" element={<LoginScreen />} />

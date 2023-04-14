@@ -35,3 +35,16 @@ export const startLogin = (userName, password) => {
     }
   };
 };
+
+export const startRegister = (user, userName, lastName, privileges, password, area, password2) => {
+  return async (dispatch) => {
+    const resp = await fetchSinToken("auth/new", { user, userName, lastName, privileges, password, area, password2 }, "POST");
+    const body = await resp.json();
+
+    if (body.ok) {
+      Swal.fire("", body.msg, "success");
+    } else {
+      Swal.fire("Error", body.msg, "error");
+    }
+  };
+};
