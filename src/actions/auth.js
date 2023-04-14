@@ -1,6 +1,7 @@
 import Swal from "sweetalert2";
 import { fetchConToken, fetchSinToken } from "../../helpers/fetch";
 import { types } from "../types/types";
+import { Toast } from "../../helpers/customAlert";
 
 const login = (userName) => {
   return {
@@ -42,7 +43,10 @@ export const addUser = (user, userName, lastName, privileges, password, area, pa
     const body = await resp.json();
 
     if (body.ok) {
-      Swal.fire("", body.msg, "success");
+      Toast.fire({
+        icon: "success",
+        title: "Usuario Creado",
+      });
     } else {
       Swal.fire("Error", body.msg, "error");
     }
@@ -55,7 +59,10 @@ export const updateUser = (user, userName, lastName, privileges, password, area,
     const body = await resp.json();
 
     if (body.ok) {
-      Swal.fire("", body.msg, "success");
+      Toast.fire({
+        icon: "success",
+        title: "Usuario Actualizado",
+      });
     } else {
       Swal.fire("Error", body.msg, "error");
     }
