@@ -4,4 +4,5 @@ export const types = {
   addUser: "[Auth] Add User",
   updateUser: "[Auth] Update User",
   usersLoaded: "[Auth] Users Loaded",
+  usersSelected: "[Auth] Users Selected",
 };
