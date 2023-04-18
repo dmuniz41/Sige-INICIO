@@ -2,6 +2,7 @@ import { types } from "../types/types";
 
 const initialState = {
   users: [],
+  selectedUser: {},
 };
 
 export const authReducer = (state = initialState, action) => {
@@ -32,6 +33,11 @@ export const authReducer = (state = initialState, action) => {
       return {
         ...state,
         users: [...action.payload],
+      };
+    case types.selectedUser:
+      return {
+        ...state,
+        selectedUser: action.payload,
       };
 
     default:

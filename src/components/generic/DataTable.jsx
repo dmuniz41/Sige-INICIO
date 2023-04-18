@@ -3,11 +3,16 @@ import { useSortBy, useTable, usePagination, useRowSelect } from "react-table";
 import { ScopedCssBaseline, Table, TableBody, TableCell, TableHead, TableRow } from "@mui/material";
 import { MdArrowUpward } from "react-icons/md/";
 import { MdArrowDownward } from "react-icons/md/";
+import { useDispatch } from "react-redux";
+import { selectedUser } from "../../actions/auth";
 
 // ! TODO: Eliminar overflow de la tabla haciendo la paginacion
 // ! TODO: Implementar la funcion de buscar
 
 export const DataTable = ({ data, columns }) => {
+  console.log("render");
+  const dispatch = useDispatch();
+
   // Crear la instancia de la tabla
   const usersTable = useTable({ columns, data }, useSortBy, usePagination, useRowSelect, (hooks) => {
     hooks.visibleColumns.push((columns) => [
@@ -36,25 +41,9 @@ export const DataTable = ({ data, columns }) => {
     ]);
   });
 
-  const IndeterminateCheckbox = React.forwardRef(({ indeterminate, ...rest }, ref) => {
-    const defaultRef = React.useRef();
-    const resolvedRef = ref || defaultRef;
-
-    React.useEffect(() => {
-      resolvedRef.current.indeterminate = indeterminate;
-    }, [resolvedRef, indeterminate]);
-
-    return (
-      <>
-        <input type="checkbox" name="checkbox" ref={resolvedRef} {...rest} />
-      </>
-    );
-  });
-
   // Obtiene las propiedades de la tabla
   const {
     getTableProps,
-
     getTableBodyProps,
     headerGroups,
     prepareRow,
@@ -72,8 +61,28 @@ export const DataTable = ({ data, columns }) => {
     state: { pageIndex, pageSize, selectedRowIds },
   } = usersTable;
 
-  const selectedRows = selectedFlatRows.map((d) => d.original);
-  console.log("🚀 ~ file: DataTable.jsx:66 ~ DataTable ~ selectedRows:", selectedRows);
+  const IndeterminateCheckbox = React.forwardRef(({ indeterminate, ...rest }, ref) => {
+    const defaultRef = React.useRef();
+    const resolvedRef = ref || defaultRef;
+
+    React.useEffect(() => {
+      resolvedRef.current.indeterminate = indeterminate;
+    }, [resolvedRef, indeterminate]);
+
+    return (
+      <>
+        <input type="checkbox" name="checkbox" ref={resolvedRef} {...rest} />
+      </>
+    );
+  });
+
+  const selectedRow = selectedFlatRows.map((row) => row.original);
+
+  if (selectedRow[0]) {
+    const { user, userName, lastName, privileges, area } = selectedRow[0];
+    console.log("🚀 ~ file: DataTable.jsx:85 ~ DataTable ~ user, userName, lastName, privileges, area:", user, userName, lastName, privileges, area);
+    // dispatch(selectedUser);
+  }
 
   return (
     <>

@@ -6,8 +6,7 @@ import { AddUser } from "./AddUser";
 import { EditUser } from "./EditUser";
 
 export const UserScreen = () => {
-  // ! TODO: Añadir path para el breadcrumb
-  const currentPath = "current path";
+  const currentPath = "Usuarios";
 
   return (
     <div className="section_wrapper">
