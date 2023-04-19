@@ -83,9 +83,7 @@ const usersLoaded = (users) => ({
   payload: users,
 });
 
-export const selectedUser = (selectedUser) => {
-  return {
-    type: types.selectedUser,
-    payload: selectedUser,
-  };
-};
+export const selectedUser = (selectedUser) => ({
+  type: types.selectedUser,
+  payload: selectedUser,
+});

@@ -4,6 +4,7 @@ import { ScopedCssBaseline, Table, TableBody, TableCell, TableHead, TableRow } f
 import { MdArrowUpward } from "react-icons/md/";
 import { MdArrowDownward } from "react-icons/md/";
 import { useDispatch } from "react-redux";
+import { useEffect } from "react";
 import { selectedUser } from "../../actions/auth";
 
 // ! TODO: Eliminar overflow de la tabla haciendo la paginacion
@@ -71,18 +72,19 @@ export const DataTable = ({ data, columns }) => {
 
     return (
       <>
-        <input type="checkbox" name="checkbox" ref={resolvedRef} {...rest} />
+        <input type="checkbox" ref={resolvedRef} {...rest} />
       </>
     );
   });
 
   const selectedRow = selectedFlatRows.map((row) => row.original);
+  const user = selectedRow[0];
 
-  if (selectedRow[0]) {
-    const { user, userName, lastName, privileges, area } = selectedRow[0];
-    console.log("🚀 ~ file: DataTable.jsx:85 ~ DataTable ~ user, userName, lastName, privileges, area:", user, userName, lastName, privileges, area);
-    // dispatch(selectedUser);
-  }
+  useEffect(() => {
+    if (user) {
+      dispatch(selectedUser(user));
+    }
+  }, [user]);
 
   return (
     <>
