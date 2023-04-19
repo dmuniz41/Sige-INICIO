@@ -79,10 +79,12 @@ export const DataTable = ({ data, columns }) => {
 
   const selectedRow = selectedFlatRows.map((row) => row.original);
   const user = selectedRow[0];
-
+  // Guardando usuario seleccionado en estado
   useEffect(() => {
     if (user) {
       dispatch(selectedUser(user));
+    } else {
+      dispatch(selectedUser({}));
     }
   }, [user]);
 

@@ -44,6 +44,7 @@
 }
 
 .toolbar_btn {
+  border: none;
   padding-top: 4px;
   display: flex;
   width: 36px;
@@ -60,5 +61,14 @@
 }
 
 .toolbar_btn:hover {
-  background-color: darken($color: white, $amount: 10);
+  background-color: darken($color: #fff, $amount: 10);
+}
+
+.toolbar_btn:disabled * {
+  pointer-events: none;
+  color: $icon_disabled;
+}
+
+.toolbar_btn:disabled {
+  background-color: transparent;
 }
