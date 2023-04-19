@@ -71,9 +71,10 @@ export const DataTable = ({ data, columns }) => {
     }, [resolvedRef, indeterminate]);
 
     return (
-      <>
+      <label className="checkbox_container">
         <input type="checkbox" ref={resolvedRef} {...rest} />
-      </>
+        <span className="checkmark"></span>
+      </label>
     );
   });
 

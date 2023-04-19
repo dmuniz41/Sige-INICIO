@@ -2,7 +2,7 @@ import React from "react";
 import { SectionHeder } from "../generic/SectionHeder";
 import { useForm } from "../../hooks/useForm";
 import { useNavigate } from "react-router-dom";
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { updateUser } from "../../actions/auth";
 
 // ! TODO: Arreglar los selcets para que sean multiples y vayan mostrando las opciones seleccionadas en tiempo real
@@ -10,15 +10,16 @@ import { updateUser } from "../../actions/auth";
 export const EditUser = () => {
   const dispatch = useDispatch();
   const navigate = useNavigate();
+  const { selectedUser } = useSelector((state) => state.auth);
 
   const [formValues, handleInputChange] = useForm({
-    user: "dmuniz",
-    userName: "Daniel",
-    lastName: "Muniz",
-    privileges: "ROLE_ADMIN",
-    password: "123456",
-    password2: "123456",
-    area: "INICIO",
+    user: selectedUser.user,
+    userName: selectedUser.userName,
+    lastName: selectedUser.lastName,
+    privileges: selectedUser.privileges,
+    password: " ",
+    password2: " ",
+    area: selectedUser.area,
   });
 
   const { user, userName, lastName, privileges, password, area, password2 } = formValues;
