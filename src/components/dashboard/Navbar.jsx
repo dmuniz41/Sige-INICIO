@@ -2,14 +2,16 @@ import { IoMdMenu, IoMdSettings } from "react-icons/io";
 import { MdKeyboardArrowDown, MdOutlineLogout } from "react-icons/md";
 import { useProSidebar } from "react-pro-sidebar";
 import userImg from "../../assets/dani.jpg";
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { logout } from "../../actions/auth";
 
 const Navbar = () => {
   const dispatch = useDispatch();
+
   const { collapseSidebar } = useProSidebar();
 
-  const user = "Daniel Muñiz";
+  const { activeUser } = useSelector((state) => state.auth);
+  const user = activeUser.user;
 
   const handleLogout = () => {
     dispatch(logout());

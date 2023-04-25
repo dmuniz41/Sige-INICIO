@@ -11,7 +11,6 @@ import { selectedUser } from "../../actions/auth";
 // ! TODO: Implementar la funcion de buscar
 
 export const DataTable = ({ data, columns }) => {
-  console.log("render");
   const dispatch = useDispatch();
 
   // Crear la instancia de la tabla
