@@ -16,7 +16,7 @@ const DashboardScreen = () => {
   return (
     <div className="dashboard_wrapper">
       <div className="sidebar">
-        <Sidebar width="260px" transitionDuration={500}>
+        <Sidebar width="260px" transitionDuration={500} defaultCollapsed={true}>
           <Menu
             transitionDuration={500}
             menuItemStyles={{
