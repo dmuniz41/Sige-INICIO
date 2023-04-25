@@ -17,8 +17,8 @@ export const EditUser = () => {
     userName: selectedUser.userName,
     lastName: selectedUser.lastName,
     privileges: selectedUser.privileges,
-    password: " ",
-    password2: " ",
+    password: "",
+    password2: "",
     area: selectedUser.area,
   });
 
@@ -36,23 +36,23 @@ export const EditUser = () => {
         <form className="form" onSubmit={HandleSubmit}>
           <div className="form_input">
             <label htmlFor="user">Usuario *</label>
-            <input type="text" id="user" name="user" value={user} onChange={handleInputChange} required />
+            <input type="text" id="user" name="user" value={user} onChange={handleInputChange} required disabled />
           </div>
           <div className="form_input">
             <label htmlFor="username">Nombre *</label>
-            <input type="text" id="username" name="userName" value={userName} onChange={handleInputChange} required />
+            <input type="text" id="username" name="userName" value={userName} onChange={handleInputChange} required disabled />
           </div>
           <div className="form_input">
             <label htmlFor="lastName">Apellidos *</label>
-            <input type="text" id="lastName" name="lastName" value={lastName} onChange={handleInputChange} required />
+            <input type="text" id="lastName" name="lastName" value={lastName} onChange={handleInputChange} required disabled />
           </div>
           <div className="form_input">
             <label htmlFor="password">Contraseña *</label>
-            <input type="text" id="password" name="password" value={password} onChange={handleInputChange} required />
+            <input type="password" id="password" name="password" value={password} onChange={handleInputChange} required />
           </div>
           <div className="form_input">
             <label htmlFor="password">Confirmar Contraseña *</label>
-            <input type="text" id="password2" name="password2" value={password2} onChange={handleInputChange} required />
+            <input type="password" id="password2" name="password2" value={password2} onChange={handleInputChange} required />
           </div>
           <div className="form_input">
             <label htmlFor="privileges">Privilegios *</label>

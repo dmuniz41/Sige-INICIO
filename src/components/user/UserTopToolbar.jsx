@@ -45,7 +45,7 @@ export const UserTopToolbar = () => {
             <FaFlag />
           </Link>
         </button>
-        <button className="toolbar_btn">
+        <button className="toolbar_btn" onClick={() => window.location.reload()}>
           <Link to="/dashboard/user">
             <FaRedo />
           </Link>

@@ -54,11 +54,11 @@ export const AddUser = () => {
           </div>
           <div className="form_input">
             <label htmlFor="password">Contraseña *</label>
-            <input type="text" id="password" name="password" value={password} onChange={handleInputChange} required />
+            <input type="password" id="password" name="password" value={password} onChange={handleInputChange} required />
           </div>
           <div className="form_input">
             <label htmlFor="password">Confirmar Contraseña *</label>
-            <input type="text" id="password2" name="password2" value={password2} onChange={handleInputChange} required />
+            <input type="password" id="password2" name="password2" value={password2} onChange={handleInputChange} required />
           </div>
           <div className="form_input">
             <label htmlFor="privileges">Privilegios *</label>
