@@ -3,11 +3,11 @@ import { fetchConToken, fetchSinToken } from "../../helpers/fetch";
 import { types } from "../types/types";
 import { Toast } from "../../helpers/customAlert";
 
-const login = (userName) => {
+const login = (user) => {
   return {
     type: types.login,
     payload: {
-      userName,
+      user,
     },
   };
 };
@@ -17,22 +17,18 @@ export const logout = () => {
   };
 };
 
-export const startLogin = (userName, password) => {
+export const startLogin = (user, password) => {
   return async (dispatch) => {
-    const resp = await fetchSinToken("auth", { userName, password }, "POST");
+    const resp = await fetchSinToken("auth", { user, password }, "POST");
     const body = await resp.json();
 
     if (body.ok) {
       localStorage.setItem("token", body.token);
       localStorage.setItem("token-init-date", new Date().getTime());
 
-      dispatch(
-        login({
-          userName: userName,
-        })
-      );
+      dispatch(login(user));
     } else {
-      Swal.fire("Error", body.msg, "error");
+      Swal.fire("Error", body.msg, "Error al autenticar usuario");
     }
   };
 };

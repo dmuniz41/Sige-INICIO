@@ -1,6 +1,7 @@
 import { types } from "../types/types";
 
 const initialState = {
+  activeUser: {},
   users: [],
   selectedUser: {},
 };
@@ -10,7 +11,7 @@ export const authReducer = (state = initialState, action) => {
     case types.login:
       return {
         ...state,
-        ...action.payload,
+        activeUser: action.payload,
         logged: true,
       };
 

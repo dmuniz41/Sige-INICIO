@@ -7,14 +7,14 @@ const LoginScreen = () => {
   const dispatch = useDispatch();
 
   const [formValues, handleInputChange] = useForm({
-    userName: "",
+    user: "",
     password: "",
   });
 
-  const { userName, password } = formValues;
+  const { user, password } = formValues;
 
   const handleLogin = (e) => {
-    dispatch(startLogin(userName, password));
+    dispatch(startLogin(user, password));
     e.preventDefault();
   };
 
@@ -24,8 +24,8 @@ const LoginScreen = () => {
         <img src={inicio} alt="logo" />
       </div>
       <form className="login_box_container" onSubmit={handleLogin}>
-        <h5 className="login_label">Nombre de Usuario</h5>
-        <input className="login_input" autoFocus type="text" name="userName" id="input_user" value={userName} onChange={handleInputChange} />
+        <h5 className="login_label">Usuario</h5>
+        <input className="login_input" autoFocus type="text" name="user" id="input_user" value={user} onChange={handleInputChange} />
         <h5 className="login_label">Contraseña</h5>
         <input className="login_input" type="password" name="password" id="input_password" value={password} onChange={handleInputChange} />
         <button className="login_btn">ENTRAR</button>
