@@ -3,7 +3,8 @@ import { SectionHeder } from "../generic/SectionHeder";
 import { useForm } from "../../hooks/useForm";
 import { useNavigate } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
-import { updateUser } from "../../actions/auth";
+import { updateUser, usersStartLoading } from "../../actions/auth";
+import Swal from "sweetalert2";
 
 // ! TODO: Arreglar los selcets para que sean multiples y vayan mostrando las opciones seleccionadas en tiempo real
 
@@ -24,16 +25,22 @@ export const EditUser = () => {
 
   const { user, userName, lastName, privileges, password, area, password2 } = formValues;
 
-  const HandleSubmit = (e) => {
+  const HandleUpdate = (e) => {
     e.preventDefault();
+    if (password !== password2) {
+      Swal.fire("Error", "Las contraseñas deben ser iguales", "error");
+      return;
+    }
     dispatch(updateUser(user, userName, lastName, privileges, password, area, password2));
+    dispatch(usersStartLoading());
+    navigate(-1);
   };
 
   return (
     <>
       <SectionHeder title="Editar Usuario" currentPath="Usuarios" />
       <div className="form_wrapper">
-        <form className="form" onSubmit={HandleSubmit}>
+        <form className="form" onSubmit={HandleUpdate}>
           <div className="form_input">
             <label htmlFor="user">Usuario *</label>
             <input type="text" id="user" name="user" value={user} onChange={handleInputChange} required disabled />
@@ -79,6 +86,7 @@ export const EditUser = () => {
             <div
               className="form_btn_cancel"
               onClick={() => {
+                dispatch(usersStartLoading());
                 navigate(-1);
               }}
             >
