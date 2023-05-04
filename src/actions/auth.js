@@ -51,13 +51,28 @@ export const addUser = (user, userName, lastName, privileges, password, area, pa
 
 export const updateUser = (user, userName, lastName, privileges, password, area, password2) => {
   return async () => {
-    const resp = await fetchConToken(`auth/${user}`, { user, userName, lastName, privileges, password, area, password2 }, "PUT");
+    const resp = await fetchConToken(`auth/`, { user, userName, lastName, privileges, password, area, password2 }, "PUT");
     const body = await resp.json();
 
     if (body.ok) {
       Toast.fire({
         icon: "success",
         title: "Usuario Actualizado",
+      });
+    } else {
+      Swal.fire("Error", body.msg, "error");
+    }
+  };
+};
+export const deleteUser = (user) => {
+  return async () => {
+    const resp = await fetchConToken(`auth/`, { user }, "DELETE");
+    const body = await resp.json();
+
+    if (body.ok) {
+      Toast.fire({
+        icon: "success",
+        title: "Usuario Eliminado",
       });
     } else {
       Swal.fire("Error", body.msg, "error");

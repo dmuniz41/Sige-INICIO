@@ -19,6 +19,10 @@ export const authReducer = (state = initialState, action) => {
       return {
         ...state,
       };
+    case types.deleteUser:
+      return {
+        ...state,
+      };
 
     case types.updateUser:
       return {

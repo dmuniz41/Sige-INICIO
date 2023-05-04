@@ -4,7 +4,7 @@ import { useForm } from "../../hooks/useForm";
 import { useNavigate } from "react-router-dom";
 import Swal from "sweetalert2";
 import { useDispatch } from "react-redux";
-import { addUser } from "../../actions/auth";
+import { addUser, usersStartLoading } from "../../actions/auth";
 
 // ! TODO: Arreglar los selcets para que sean multiples y vayan mostrando las opciones seleccionadas en tiempo real
 
@@ -33,6 +33,8 @@ export const AddUser = () => {
     }
 
     dispatch(addUser(user, userName, lastName, privileges, password, area, password2));
+    dispatch(usersStartLoading());
+    navigate(-1);
   };
 
   return (
@@ -85,6 +87,7 @@ export const AddUser = () => {
             <div
               className="form_btn_cancel"
               onClick={() => {
+                dispatch(usersStartLoading());
                 navigate(-1);
               }}
             >
