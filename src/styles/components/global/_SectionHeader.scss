@@ -1,7 +1,7 @@
 .section_header {
   display: flex;
   width: 100%;
-  min-height: 3rem;
+  height: 3rem;
   justify-content: space-between;
   align-items: center;
   padding: 1rem;
@@ -9,6 +9,7 @@
   box-shadow: 0 4px 8px $box_shadow;
   background-color: #fff;
   margin: 0 auto;
+  margin-bottom: 0.5rem;
 }
 
 .section_header h1 {

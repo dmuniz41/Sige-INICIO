@@ -61,3 +61,44 @@
   -ms-transform: rotate(45deg);
   transform: rotate(45deg);
 }
+
+.table_pagination {
+  display: flex;
+  gap: 0.5rem;
+  justify-content: center;
+  align-items: center;
+  height: 3rem;
+  margin-bottom: 1rem;
+  padding: 10px;
+}
+.table_pagination select {
+  width: 10rem;
+  height: 2rem;
+  cursor: pointer;
+}
+.table_pagination button {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border: 0px solid $border_input;
+  border-radius: 5px;
+  width: 2rem;
+  height: 2rem;
+  cursor: pointer;
+}
+.table_pagination button:hover {
+  background-color: darken($color: #fff, $amount: 10);
+}
+.table_pagination input {
+  width: 5rem;
+  height: 2rem;
+  border-radius: 5px;
+  border: 1px solid $border_input;
+  padding: 5px;
+  margin-left: 5px;
+}
+.table_pagination span {
+  display: flex;
+  align-items: center;
+  font-size: medium;
+}

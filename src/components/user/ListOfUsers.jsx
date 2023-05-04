@@ -4,7 +4,7 @@ import { SectionHeder } from "../generic/SectionHeder";
 
 export const ListOfUsers = ({ currentPath }) => {
   return (
-    <div className="section_wrapper">
+    <div>
       {/* Header de la pantalla de usuarios */}
       <SectionHeder title="Listado de Usuarios" currentPath="Usuarios" />
       <div className="section_body">

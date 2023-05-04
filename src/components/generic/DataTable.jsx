@@ -1,13 +1,14 @@
 import React, { useState } from "react";
 import { useSortBy, useTable, usePagination, useRowSelect } from "react-table";
 import { ScopedCssBaseline, Table, TableBody, TableCell, TableHead, TableRow } from "@mui/material";
-import { MdArrowUpward } from "react-icons/md/";
-import { MdArrowDownward } from "react-icons/md/";
+import { MdArrowUpward, MdArrowDownward } from "react-icons/md/";
+import { FaAngleDoubleRight, FaAngleDoubleLeft, FaAngleRight, FaAngleLeft } from "react-icons/fa/";
 import { useDispatch } from "react-redux";
 import { useEffect } from "react";
 import { selectedUser } from "../../actions/auth";
 
-// ! TODO: Eliminar overflow de la tabla haciendo la paginacion
+const PAGE_SIZES = [10, 20, 30, 40];
+
 // ! TODO: Implementar la funcion de buscar
 
 export const DataTable = ({ data, columns }) => {
@@ -44,7 +45,6 @@ export const DataTable = ({ data, columns }) => {
   // Obtiene las propiedades de la tabla
   const {
     getTableProps,
-    getTableBodyProps,
     headerGroups,
     prepareRow,
     page,
@@ -55,10 +55,9 @@ export const DataTable = ({ data, columns }) => {
     gotoPage,
     nextPage,
     previousPage,
-    rows,
     setPageSize,
     selectedFlatRows,
-    state: { pageIndex, pageSize, selectedRowIds },
+    state: { pageIndex, pageSize },
   } = usersTable;
 
   const IndeterminateCheckbox = React.forwardRef(({ indeterminate, ...rest }, ref) => {
@@ -89,9 +88,9 @@ export const DataTable = ({ data, columns }) => {
   }, [user]);
 
   return (
-    <>
+    <div style={{ overflow: "none" }}>
       <ScopedCssBaseline />
-      <Table {...getTableProps()}>
+      <Table {...getTableProps()} sx={{ backgroundColor: "#fff", borderRadius: "5px" }}>
         <TableHead>
           {headerGroups.map((headerGroup) => (
             <TableRow {...headerGroup.getHeaderGroupProps()}>
@@ -109,7 +108,7 @@ export const DataTable = ({ data, columns }) => {
           ))}
         </TableHead>
         <TableBody>
-          {rows.map((row, i) => {
+          {page.map((row, i) => {
             prepareRow(row);
             return (
               <TableRow {...row.getRowProps()}>
@@ -121,6 +120,49 @@ export const DataTable = ({ data, columns }) => {
           })}
         </TableBody>
       </Table>
-    </>
+      <div className="table_pagination">
+        <button onClick={() => gotoPage(0)} disabled={!canPreviousPage}>
+          <FaAngleDoubleLeft />
+        </button>
+        <button onClick={() => previousPage()} disabled={!canPreviousPage}>
+          <FaAngleLeft />
+        </button>
+        <button onClick={() => nextPage()} disabled={!canNextPage}>
+          <FaAngleRight />
+        </button>
+        <button onClick={() => gotoPage(pageCount - 1)} disabled={!canNextPage}>
+          <FaAngleDoubleRight />
+        </button>
+        <span>
+          Página
+          <strong>
+            {pageIndex + 1} de {pageOptions.length}
+          </strong>
+        </span>
+        <span>
+          | Ir a página :
+          <input
+            type="number"
+            defaultValue={pageIndex + 1}
+            onChange={(e) => {
+              const page = e.target.value ? Number(e.target.value) - 1 : 0;
+              gotoPage(page);
+            }}
+          />
+        </span>
+        <select
+          value={pageSize}
+          onChange={(e) => {
+            setPageSize(Number(e.target.value));
+          }}
+        >
+          {PAGE_SIZES.map((pageSize) => (
+            <option key={pageSize} value={pageSize}>
+              Mostrar {pageSize}
+            </option>
+          ))}
+        </select>
+      </div>
+    </div>
   );
 };
