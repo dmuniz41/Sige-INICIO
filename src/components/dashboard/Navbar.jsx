@@ -3,7 +3,7 @@ import { MdKeyboardArrowDown, MdOutlineLogout } from "react-icons/md";
 import { useProSidebar } from "react-pro-sidebar";
 import userImg from "../../assets/dani.jpg";
 import { useDispatch, useSelector } from "react-redux";
-import { logout } from "../../actions/auth";
+import { startLogout } from "../../actions/auth";
 
 const Navbar = () => {
   const dispatch = useDispatch();
@@ -14,7 +14,7 @@ const Navbar = () => {
   const user = activeUser.user;
 
   const handleLogout = () => {
-    dispatch(logout());
+    dispatch(startLogout());
   };
 
   return (

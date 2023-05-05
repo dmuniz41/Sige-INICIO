@@ -11,7 +11,7 @@ const login = (user) => {
     },
   };
 };
-export const logout = () => {
+const logout = () => {
   return {
     type: types.logout,
   };
@@ -30,6 +30,14 @@ export const startLogin = (user, password) => {
     } else {
       Swal.fire("Error", body.msg, "Error al autenticar usuario");
     }
+  };
+};
+
+export const startLogout = () => {
+  return (dispatch) => {
+    localStorage.removeItem("token");
+    localStorage.removeItem("token-init-date");
+    dispatch(logout());
   };
 };
 
