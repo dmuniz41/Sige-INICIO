@@ -13,8 +13,10 @@
 }
 
 .form_input {
-  display: grid;
+  display: flex;
+  flex-direction: column;
   gap: 10px;
+  overflow: hidden;
 }
 
 .form_input input {
@@ -80,4 +82,18 @@ select {
 
 .form_btn_save:hover {
   background-color: darken($color: white, $amount: 20);
+}
+
+.selected_input_item {
+  display: flex;
+  gap: 0.5em;
+  font-size: small;
+  flex-wrap: wrap;
+}
+.selected_input_item > * {
+  border-radius: 5px;
+  border: 1px solid;
+  padding: 5px;
+  background-color: $background_light;
+  cursor: pointer;
 }

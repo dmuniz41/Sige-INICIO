@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import { SectionHeder } from "../generic/SectionHeder";
 import { useForm } from "../../hooks/useForm";
 import { useNavigate } from "react-router-dom";
@@ -6,34 +6,48 @@ import { useDispatch, useSelector } from "react-redux";
 import { updateUser, usersStartLoading } from "../../actions/auth";
 import Swal from "sweetalert2";
 
-// ! TODO: Arreglar los selcets para que sean multiples y vayan mostrando las opciones seleccionadas en tiempo real
-
 export const EditUser = () => {
   const dispatch = useDispatch();
   const navigate = useNavigate();
   const { selectedUser } = useSelector((state) => state.auth);
 
+  const [listOfPrivileges, setListOfPrivileges] = useState(selectedUser.privileges);
+
   const [formValues, handleInputChange] = useForm({
     user: selectedUser.user,
     userName: selectedUser.userName,
     lastName: selectedUser.lastName,
-    privileges: selectedUser.privileges,
     password: "",
     password2: "",
     area: selectedUser.area,
   });
 
-  const { user, userName, lastName, privileges, password, area, password2 } = formValues;
+  let { user, userName, lastName, privilege, password, area, password2 } = formValues;
+
+  useEffect(() => {
+    if (listOfPrivileges.includes(privilege) || !privilege) {
+      return;
+    }
+    setListOfPrivileges((privileges) => [...privileges, privilege]);
+  }, [privilege]);
 
   const HandleUpdate = (e) => {
     e.preventDefault();
+
     if (password !== password2) {
       Swal.fire("Error", "Las contraseñas deben ser iguales", "error");
       return;
     }
-    dispatch(updateUser(user, userName, lastName, privileges, password, area, password2));
+    dispatch(updateUser(user, userName, lastName, listOfPrivileges, password, area, password2));
     dispatch(usersStartLoading());
     navigate(-1);
+  };
+
+  const handleRemoveSelectedItem = (e) => {
+    const selectedPrivilege = e.target.innerText;
+
+    const currentPrivileges = listOfPrivileges.filter((privilege) => privilege != selectedPrivilege);
+    setListOfPrivileges(currentPrivileges);
   };
 
   return (
@@ -63,7 +77,20 @@ export const EditUser = () => {
           </div>
           <div className="form_input">
             <label htmlFor="privileges">Privilegios *</label>
-            <select id="privileges" className="form_select" name="privileges" value={privileges} onChange={handleInputChange} required>
+
+            <div className="selected_input_item">
+              {listOfPrivileges
+                ? listOfPrivileges.map((privilege) => {
+                    return (
+                      <div id="privilege" key={privilege} onClick={handleRemoveSelectedItem}>
+                        {privilege}
+                      </div>
+                    );
+                  })
+                : ""}
+            </div>
+
+            <select id="privilege" className="form_select" name="privilege" value={privilege} onChange={handleInputChange} required>
               <option value="ROLE_ADMIN">ADMIN</option>
               <option value="ROLE_COMMERCIAL ">COMMERCIAL</option>
               <option value="ROLE_USER">USER</option>
