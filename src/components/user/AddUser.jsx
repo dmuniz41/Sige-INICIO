@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import { SectionHeder } from "../generic/SectionHeder";
 import { useForm } from "../../hooks/useForm";
 import { useNavigate } from "react-router-dom";
@@ -6,24 +6,33 @@ import Swal from "sweetalert2";
 import { useDispatch } from "react-redux";
 import { addUser, usersStartLoading } from "../../actions/auth";
 
-// ! TODO: Arreglar los selcets para que sean multiples y vayan mostrando las opciones seleccionadas en tiempo real
+//  TODO: Arreglar los estilos del select
 
 export const AddUser = () => {
   const dispatch = useDispatch();
   const navigate = useNavigate();
 
+  const [listOfPrivileges, setListOfPrivileges] = useState(["ROLE_USER"]);
+
   const [formValues, handleInputChange] = useForm({
     user: "dmuniz",
     userName: "Daniel",
     lastName: "Muniz",
-    privileges: "ROLE_ADMIN",
     password: "123456",
     password2: "123456",
     area: "INICIO",
   });
 
-  const { user, userName, lastName, privileges, password, area, password2 } = formValues;
+  let { user, userName, lastName, privilege, password, area, password2 } = formValues;
 
+  useEffect(() => {
+    if (listOfPrivileges.includes(privilege) || !privilege) {
+      return;
+    }
+    setListOfPrivileges((privileges) => [...privileges, privilege]);
+  }, [privilege]);
+
+  console.log("🚀 ~ file: AddUser.jsx:17 ~ AddUser ~ listOfPrivileges:", listOfPrivileges);
   const HandleRegister = (e) => {
     e.preventDefault();
 
@@ -32,11 +41,17 @@ export const AddUser = () => {
       return;
     }
 
-    dispatch(addUser(user, userName, lastName, privileges, password, area, password2));
+    dispatch(addUser(user, userName, lastName, listOfPrivileges, password, area, password2));
     dispatch(usersStartLoading());
     navigate(-1);
   };
 
+  const handleRemoveSelectedItem = (e) => {
+    const selectedPrivilege = e.target.innerText;
+
+    const currentPrivileges = listOfPrivileges.filter((privilege) => privilege != selectedPrivilege);
+    setListOfPrivileges(currentPrivileges);
+  };
   return (
     <>
       <SectionHeder title="Crear Usuario" currentPath="Usuarios" />
@@ -63,11 +78,21 @@ export const AddUser = () => {
             <input type="password" id="password2" name="password2" value={password2} onChange={handleInputChange} required />
           </div>
           <div className="form_input">
-            <label htmlFor="privileges">Privilegios *</label>
-            <select id="privileges" className="form_select" name="privileges" value={privileges} onChange={handleInputChange} required>
-              <option value="ROLE_ADMIN">ADMIN</option>
-              <option value="ROLE_COMMERCIAL ">COMMERCIAL</option>
+            <label htmlFor="privilege">Privilegios *</label>
+            {listOfPrivileges
+              ? listOfPrivileges.map((privilege) => {
+                  return (
+                    <div id="privilege" key={privilege} onClick={handleRemoveSelectedItem}>
+                      {privilege}
+                    </div>
+                  );
+                })
+              : ""}
+
+            <select id="privilege" className="form_select" name="privilege" value={privilege} onChange={handleInputChange} required>
               <option value="ROLE_USER">USER</option>
+              <option value="ROLE_ADMIN">ADMIN</option>
+              <option value="ROLE_COMMERCIAL">COMMERCIAL</option>
               <option value="ROLE_HR">HR</option>
               <option value="ROLE_PROYECT">PROYECT</option>
               <option value="ROLE_WAREHOUSE">WAREHOUSE</option>
