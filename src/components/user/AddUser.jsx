@@ -6,8 +6,6 @@ import Swal from "sweetalert2";
 import { useDispatch } from "react-redux";
 import { addUser, usersStartLoading } from "../../actions/auth";
 
-//  TODO: Arreglar los estilos del select
-
 export const AddUser = () => {
   const dispatch = useDispatch();
   const navigate = useNavigate();
@@ -32,7 +30,6 @@ export const AddUser = () => {
     setListOfPrivileges((privileges) => [...privileges, privilege]);
   }, [privilege]);
 
-  console.log("🚀 ~ file: AddUser.jsx:17 ~ AddUser ~ listOfPrivileges:", listOfPrivileges);
   const HandleRegister = (e) => {
     e.preventDefault();
 
@@ -52,6 +49,7 @@ export const AddUser = () => {
     const currentPrivileges = listOfPrivileges.filter((privilege) => privilege != selectedPrivilege);
     setListOfPrivileges(currentPrivileges);
   };
+
   return (
     <>
       <SectionHeder title="Crear Usuario" currentPath="Usuarios" />
@@ -79,16 +77,17 @@ export const AddUser = () => {
           </div>
           <div className="form_input">
             <label htmlFor="privilege">Privilegios *</label>
-            {listOfPrivileges
-              ? listOfPrivileges.map((privilege) => {
-                  return (
-                    <div id="privilege" key={privilege} onClick={handleRemoveSelectedItem}>
-                      {privilege}
-                    </div>
-                  );
-                })
-              : ""}
-
+            <div className="selected_input_item">
+              {listOfPrivileges
+                ? listOfPrivileges.map((privilege) => {
+                    return (
+                      <div key={privilege} id="privilege" onClick={handleRemoveSelectedItem}>
+                        {privilege}
+                      </div>
+                    );
+                  })
+                : ""}
+            </div>
             <select id="privilege" className="form_select" name="privilege" value={privilege} onChange={handleInputChange} required>
               <option value="ROLE_USER">USER</option>
               <option value="ROLE_ADMIN">ADMIN</option>
