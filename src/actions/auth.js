@@ -3,7 +3,7 @@ import { fetchConToken, fetchSinToken } from "../../helpers/fetch";
 import { types } from "../types/types";
 import { Toast } from "../../helpers/customAlert";
 
-const login = (user) => {
+export const login = (user) => {
   return {
     type: types.login,
     payload: {
@@ -11,7 +11,7 @@ const login = (user) => {
     },
   };
 };
-const logout = () => {
+export const logout = () => {
   return {
     type: types.logout,
   };
@@ -97,7 +97,7 @@ export const usersStartLoading = () => {
   };
 };
 
-const usersLoaded = (users) => ({
+export const usersLoaded = (users) => ({
   type: types.usersLoaded,
   payload: users,
 });
