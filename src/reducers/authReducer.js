@@ -4,6 +4,7 @@ const initialState = {
   users: [],
   activeUser: {},
   selectedUser: {},
+  checking: true,
 };
 
 export const authReducer = (state = initialState, action) => {
@@ -12,9 +13,14 @@ export const authReducer = (state = initialState, action) => {
       return {
         ...state,
         activeUser: action.payload,
+        checking: false,
         logged: true,
       };
-
+    case types.checkingFinish:
+      return {
+        ...state,
+        checking: false,
+      };
     case types.addUser:
       return {
         ...state,
@@ -23,12 +29,10 @@ export const authReducer = (state = initialState, action) => {
       return {
         ...state,
       };
-
     case types.updateUser:
       return {
         ...state,
       };
-
     case types.logout:
       return {
         ...state,

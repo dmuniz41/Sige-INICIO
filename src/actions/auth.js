@@ -41,21 +41,58 @@ export const startLogout = () => {
   };
 };
 
-export const addUser = (user, userName, lastName, privileges, password, area, password2) => {
-  return async () => {
-    const resp = await fetchConToken("auth/new", { user, userName, lastName, privileges, password, area, password2 }, "POST");
+export const startChecking = () => {
+  return async (dispatch) => {
+    const resp = await fetchConToken("auth/renew", "GET");
     const body = await resp.json();
 
     if (body.ok) {
-      Toast.fire({
-        icon: "success",
-        title: "Usuario Creado",
-      });
+      localStorage.setItem("token", body.token);
+      localStorage.setItem("token-init-date", new Date().getTime());
+
+      dispatch(login(body.user));
     } else {
-      Swal.fire("Error", body.msg, "error");
+      dispatch(checkingFinish());
     }
   };
 };
+
+const checkingFinish = () => ({
+  type: types.checkingFinish,
+});
+
+export const startAddUser = (user, userName, lastName, privileges, password, area, password2) => {
+  return async (dispatch) => {
+    try {
+      const resp = await fetchConToken("auth/new", { user, userName, lastName, privileges, password, area, password2 }, "POST");
+      const body = await resp.json();
+
+      if (body.ok) {
+        Toast.fire({
+          icon: "success",
+          title: "Usuario Creado",
+        });
+        dispatch(addUser(user, userName, lastName, privileges, password, area, password2));
+      } else {
+        Swal.fire("Error", body.msg, "error");
+      }
+    } catch (error) {
+      console.log(err);
+    }
+  };
+};
+
+const addUser = (user, userName, lastName, privileges, password, area, password2) => ({
+  type: types.addUser,
+  payload: {
+    user,
+    userName,
+    lastName,
+    privileges,
+    password,
+    area,
+  },
+});
 
 export const updateUser = (user, userName, lastName, privileges, password, area, password2) => {
   return async () => {

@@ -4,7 +4,7 @@ import { useForm } from "../../hooks/useForm";
 import { useNavigate } from "react-router-dom";
 import Swal from "sweetalert2";
 import { useDispatch } from "react-redux";
-import { addUser, usersStartLoading } from "../../actions/auth";
+import { startAddUser, usersStartLoading } from "../../actions/auth";
 
 export const AddUser = () => {
   const dispatch = useDispatch();
@@ -38,7 +38,7 @@ export const AddUser = () => {
       return;
     }
 
-    dispatch(addUser(user, userName, lastName, listOfPrivileges, password, area, password2));
+    dispatch(startAddUser(user, userName, lastName, listOfPrivileges, password, area, password2));
     dispatch(usersStartLoading());
     navigate(-1);
   };

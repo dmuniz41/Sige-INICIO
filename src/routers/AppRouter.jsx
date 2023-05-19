@@ -3,13 +3,19 @@ import LoginScreen from "../components/auth/LoginScreen";
 import DashboardScreen from "../components/dashboard/DashboardScreen";
 import { PrivateRoutes } from "../components/auth/PrivateRoutes";
 import { PublicRoutes } from "../components/auth/PublicRoutes";
-import { useSelector } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { UserScreen } from "../components/user/UserScreen";
-
-// TODO
+import { useEffect } from "react";
+import { startChecking } from "../actions/auth";
 
 export const AppRouter = () => {
+  const dispatch = useDispatch();
+
   const { logged } = useSelector((state) => state.auth);
+  useEffect(() => {
+    dispatch(startChecking());
+  }, [dispatch]);
+
   return (
     <>
       <Routes>
