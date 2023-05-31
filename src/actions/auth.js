@@ -95,7 +95,7 @@ const addUser = (user, userName, lastName, privileges, password, area, password2
 });
 
 export const startUserUpdate = (user, userName, lastName, privileges, password, area, password2)=> {
-  return async(dispatch)=>{
+  return async (dispatch)=>{
     try {
       const resp = await fetchConToken(`auth/`, { user, userName, lastName, privileges, password, area, password2 }, "PUT");
       const body = await resp.json();
@@ -127,21 +127,32 @@ const updateUser = (user, userName, lastName, privileges, password, area, passwo
     }
   });
 
-export const deleteUser = (user) => {
-  return async () => {
+export const startDeleteUser = (user) => {
+  return async (dispatch) => {
     const resp = await fetchConToken(`auth/`, { user }, "DELETE");
     const body = await resp.json();
-
-    if (body.ok) {
-      Toast.fire({
-        icon: "success",
-        title: "Usuario Eliminado",
-      });
-    } else {
-      Swal.fire("Error", body.msg, "error");
+    try {
+      if (body.ok) {
+        dispatch(deleteUser(user))
+        Toast.fire({
+          icon: "success",
+          title: "Usuario Eliminado",
+        });
+      } else {
+        Swal.fire("Error", body.msg, "error");
+      }
+    } catch (error) {
+      console.log(error);
     }
-  };
-};
+  }
+}
+
+const deleteUser = (user) => ({
+  type: types.deleteUser,
+  payload: {
+  user
+  }
+});
 
 export const usersStartLoading = () => {
   return async (dispatch) => {
