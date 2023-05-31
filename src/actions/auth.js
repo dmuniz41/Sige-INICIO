@@ -94,21 +94,39 @@ const addUser = (user, userName, lastName, privileges, password, area, password2
   },
 });
 
-export const updateUser = (user, userName, lastName, privileges, password, area, password2) => {
-  return async () => {
-    const resp = await fetchConToken(`auth/`, { user, userName, lastName, privileges, password, area, password2 }, "PUT");
-    const body = await resp.json();
-
-    if (body.ok) {
-      Toast.fire({
-        icon: "success",
-        title: "Usuario Actualizado",
-      });
-    } else {
-      Swal.fire("Error", body.msg, "error");
+export const startUserUpdate = (user, userName, lastName, privileges, password, area, password2)=> {
+  return async(dispatch)=>{
+    try {
+      const resp = await fetchConToken(`auth/`, { user, userName, lastName, privileges, password, area, password2 }, "PUT");
+      const body = await resp.json();
+      if (body.ok) {
+        Toast.fire({
+          icon: "success",
+          title: "Usuario Actualizado",
+        });
+        dispatch(updateUser(user, userName, lastName, privileges, password, area, password2))
+      } else {
+        Swal.fire("Error", body.msg, "error");
+      }
+      
+    } catch (error) {
+      console.log(error);
     }
-  };
-};
+  }
+}
+const updateUser = (user, userName, lastName, privileges, password, area, password2) => ({
+    type: types.updateUser,
+    payload: {
+    user,
+    userName,
+    lastName,
+    privileges,
+    password,
+    area,
+    password2
+    }
+  });
+
 export const deleteUser = (user) => {
   return async () => {
     const resp = await fetchConToken(`auth/`, { user }, "DELETE");
