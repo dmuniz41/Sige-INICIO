@@ -3,19 +3,7 @@ import { fetchConToken, fetchSinToken } from "../../helpers/fetch";
 import { types } from "../types/types";
 import { Toast } from "../../helpers/customAlert";
 
-export const login = (user) => {
-  return {
-    type: types.login,
-    payload: {
-      user,
-    },
-  };
-};
-export const logout = () => {
-  return {
-    type: types.logout,
-  };
-};
+
 
 export const startLogin = (user, password) => {
   return async (dispatch) => {
@@ -32,7 +20,6 @@ export const startLogin = (user, password) => {
     }
   };
 };
-
 export const startLogout = () => {
   return (dispatch) => {
     localStorage.removeItem("token");
@@ -40,7 +27,6 @@ export const startLogout = () => {
     dispatch(logout());
   };
 };
-
 export const startChecking = () => {
   return async (dispatch) => {
     const resp = await fetchConToken("auth/renew", "GET");
@@ -56,11 +42,6 @@ export const startChecking = () => {
     }
   };
 };
-
-const checkingFinish = () => ({
-  type: types.checkingFinish,
-});
-
 export const startAddUser = (user, userName, lastName, privileges, password, area, password2) => {
   return async (dispatch) => {
     try {
@@ -72,7 +53,7 @@ export const startAddUser = (user, userName, lastName, privileges, password, are
           icon: "success",
           title: "Usuario Creado",
         });
-        dispatch(addUser(user, userName, lastName, privileges, password, area, password2));
+        dispatch(addUser(user, userName, lastName, privileges, password, area));
       } else {
         Swal.fire("Error", body.msg, "error");
       }
@@ -81,19 +62,6 @@ export const startAddUser = (user, userName, lastName, privileges, password, are
     }
   };
 };
-
-const addUser = (user, userName, lastName, privileges, password, area, password2) => ({
-  type: types.addUser,
-  payload: {
-    user,
-    userName,
-    lastName,
-    privileges,
-    password,
-    area,
-  },
-});
-
 export const startUserUpdate = (user, userName, lastName, privileges, password, area, password2)=> {
   return async (dispatch)=>{
     try {
@@ -114,19 +82,6 @@ export const startUserUpdate = (user, userName, lastName, privileges, password, 
     }
   }
 }
-const updateUser = (user, userName, lastName, privileges, password, area, password2) => ({
-    type: types.updateUser,
-    payload: {
-    user,
-    userName,
-    lastName,
-    privileges,
-    password,
-    area,
-    password2
-    }
-  });
-
 export const startDeleteUser = (user) => {
   return async (dispatch) => {
     const resp = await fetchConToken(`auth/`, { user }, "DELETE");
@@ -146,14 +101,6 @@ export const startDeleteUser = (user) => {
     }
   }
 }
-
-const deleteUser = (user) => ({
-  type: types.deleteUser,
-  payload: {
-  user
-  }
-});
-
 export const usersStartLoading = () => {
   return async (dispatch) => {
     const resp = await fetchConToken(`auth/`, "GET");
@@ -162,13 +109,56 @@ export const usersStartLoading = () => {
     dispatch(usersLoaded(body.listOfUsers));
   };
 };
-
 export const usersLoaded = (users) => ({
   type: types.usersLoaded,
   payload: users,
 });
-
 export const selectedUser = (selectedUser) => ({
   type: types.selectedUser,
   payload: selectedUser,
+});
+const login = (user) => {
+  return {
+    type: types.login,
+    payload: {
+      user,
+    },
+  };
+};
+const logout = () => {
+  return {
+    type: types.logout,
+  };
+};
+const checkingFinish = () => ({
+  type: types.checkingFinish,
+});
+const addUser = (user, userName, lastName, privileges, password, area) => ({
+  type: types.addUser,
+  payload: {
+    user,
+    userName,
+    lastName,
+    privileges,
+    password,
+    area,
+  },
+});
+const updateUser = (user, userName, lastName, privileges, password, area, password2) => ({
+  type: types.updateUser,
+  payload: {
+  user,
+  userName,
+  lastName,
+  privileges,
+  password,
+  area,
+  password2
+  }
+});
+const deleteUser = (user) => ({
+  type: types.deleteUser,
+  payload: {
+  user
+  }
 });
