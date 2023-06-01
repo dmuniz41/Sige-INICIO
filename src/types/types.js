@@ -1,9 +1,14 @@
 export const types = {
-  login: "[Auth] Login",
-  logout: "[Auth] Logout",
-  addUser: "[Auth] Add User",
-  updateUser: "[Auth] Update User",
-  deleteUser: "[Auth] Delete User",
-  usersLoaded: "[Auth] Users Loaded",
-  selectedUser: "[Auth] User Selected",
+  login :         "[Auth] Login",
+  logout:         "[Auth] Logout",
+  startTokenRenew:"[Auth] Start token renew",
+  checkingFinish: "[Auth] Finish checking login state",
+  startLogin:     "[Auth] Start login",
+
+  addUser:        "[User] Add User",
+  startAddUser:   "[User] Start add user",
+  updateUser:     "[User] Update User",
+  deleteUser:     "[User] Delete User",
+  usersLoaded:    "[User] Users Loaded",
+  selectedUser:   "[User] User Selected",
 };

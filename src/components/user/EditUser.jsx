@@ -1,25 +1,26 @@
 import React, { useEffect, useState } from "react";
+import Swal from "sweetalert2";
+
 import { SectionHeder } from "../generic/SectionHeder";
 import { useForm } from "../../hooks/useForm";
 import { useNavigate } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
-import { updateUser, usersStartLoading } from "../../actions/auth";
-import Swal from "sweetalert2";
+import { startUserUpdate, usersStartLoading } from "../../actions/users";
 
 export const EditUser = () => {
   const dispatch = useDispatch();
   const navigate = useNavigate();
-  const { selectedUser } = useSelector((state) => state.auth);
+  const { selectedUser } = useSelector((state) => state.user);
 
   const [listOfPrivileges, setListOfPrivileges] = useState(selectedUser.privileges);
 
   const [formValues, handleInputChange] = useForm({
-    user: selectedUser.user,
-    userName: selectedUser.userName,
-    lastName: selectedUser.lastName,
-    password: "",
+    user     : selectedUser.user,
+    userName : selectedUser.userName,
+    lastName : selectedUser.lastName,
+    password : "",
     password2: "",
-    area: selectedUser.area,
+    area     : selectedUser.area,
   });
 
   let { user, userName, lastName, privilege, password, area, password2 } = formValues;
@@ -38,7 +39,7 @@ export const EditUser = () => {
       Swal.fire("Error", "Las contraseñas deben ser iguales", "error");
       return;
     }
-    dispatch(updateUser(user, userName, lastName, listOfPrivileges, password, area, password2));
+    dispatch(startUserUpdate(user, userName, lastName, listOfPrivileges, password, area, password2));
     dispatch(usersStartLoading());
     navigate(-1);
   };
@@ -57,27 +58,59 @@ export const EditUser = () => {
         <form className="form" onSubmit={HandleUpdate}>
           <div className="form_input">
             <label htmlFor="user">Usuario *</label>
-            <input type="text" id="user" name="user" value={user} onChange={handleInputChange} required disabled />
+            <input 
+              type="text" 
+              id="user" 
+              name="user" 
+              value={user} 
+              onChange={handleInputChange} 
+              required 
+              disabled />
           </div>
           <div className="form_input">
             <label htmlFor="username">Nombre *</label>
-            <input type="text" id="username" name="userName" value={userName} onChange={handleInputChange} required disabled />
+            <input 
+              type="text" 
+              id="username" 
+              name="userName" 
+              value={userName} 
+              onChange={handleInputChange} 
+              required 
+              disabled />
           </div>
           <div className="form_input">
             <label htmlFor="lastName">Apellidos *</label>
-            <input type="text" id="lastName" name="lastName" value={lastName} onChange={handleInputChange} required disabled />
+            <input 
+              type="text" 
+              id="lastName" 
+              name="lastName" 
+              value={lastName} 
+              onChange={handleInputChange} 
+              required 
+              disabled />
           </div>
           <div className="form_input">
             <label htmlFor="password">Contraseña *</label>
-            <input type="password" id="password" name="password" value={password} onChange={handleInputChange} required />
+            <input 
+              type="password" 
+              id="password" 
+              name="password" 
+              value={password} 
+              onChange={handleInputChange} 
+              required />
           </div>
           <div className="form_input">
             <label htmlFor="password">Confirmar Contraseña *</label>
-            <input type="password" id="password2" name="password2" value={password2} onChange={handleInputChange} required />
+            <input 
+              type="password" 
+              id="password2" 
+              name="password2" 
+              value={password2} 
+              onChange={handleInputChange} 
+              required />
           </div>
           <div className="form_input">
             <label htmlFor="privileges">Privilegios *</label>
-
             <div className="selected_input_item">
               {listOfPrivileges
                 ? listOfPrivileges.map((privilege) => {
@@ -89,8 +122,13 @@ export const EditUser = () => {
                   })
                 : ""}
             </div>
-
-            <select id="privilege" className="form_select" name="privilege" value={privilege} onChange={handleInputChange} required>
+            <select 
+              id="privilege" 
+              className="form_select" 
+              name="privilege" 
+              value={privilege} 
+              onChange={handleInputChange} 
+              required>
               <option value="ROLE_ADMIN">ADMIN</option>
               <option value="ROLE_COMMERCIAL ">COMMERCIAL</option>
               <option value="ROLE_USER">USER</option>
@@ -100,7 +138,6 @@ export const EditUser = () => {
               <option value="ROLE_OFFICE">OFFICE</option>
             </select>
           </div>
-
           <div className="form_input">
             <label htmlFor="area">Área *</label>
             <select id="area" className="form_select" name="area" value={area} onChange={handleInputChange} required>

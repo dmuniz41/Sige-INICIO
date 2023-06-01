@@ -1,21 +1,7 @@
 import Swal from "sweetalert2";
+
 import { fetchConToken, fetchSinToken } from "../../helpers/fetch";
 import { types } from "../types/types";
-import { Toast } from "../../helpers/customAlert";
-
-export const login = (user) => {
-  return {
-    type: types.login,
-    payload: {
-      user,
-    },
-  };
-};
-export const logout = () => {
-  return {
-    type: types.logout,
-  };
-};
 
 export const startLogin = (user, password) => {
   return async (dispatch) => {
@@ -32,7 +18,6 @@ export const startLogin = (user, password) => {
     }
   };
 };
-
 export const startLogout = () => {
   return (dispatch) => {
     localStorage.removeItem("token");
@@ -40,69 +25,34 @@ export const startLogout = () => {
     dispatch(logout());
   };
 };
-
-export const addUser = (user, userName, lastName, privileges, password, area, password2) => {
-  return async () => {
-    const resp = await fetchConToken("auth/new", { user, userName, lastName, privileges, password, area, password2 }, "POST");
-    const body = await resp.json();
-
-    if (body.ok) {
-      Toast.fire({
-        icon: "success",
-        title: "Usuario Creado",
-      });
-    } else {
-      Swal.fire("Error", body.msg, "error");
-    }
-  };
-};
-
-export const updateUser = (user, userName, lastName, privileges, password, area, password2) => {
-  return async () => {
-    const resp = await fetchConToken(`auth/`, { user, userName, lastName, privileges, password, area, password2 }, "PUT");
-    const body = await resp.json();
-
-    if (body.ok) {
-      Toast.fire({
-        icon: "success",
-        title: "Usuario Actualizado",
-      });
-    } else {
-      Swal.fire("Error", body.msg, "error");
-    }
-  };
-};
-export const deleteUser = (user) => {
-  return async () => {
-    const resp = await fetchConToken(`auth/`, { user }, "DELETE");
-    const body = await resp.json();
-
-    if (body.ok) {
-      Toast.fire({
-        icon: "success",
-        title: "Usuario Eliminado",
-      });
-    } else {
-      Swal.fire("Error", body.msg, "error");
-    }
-  };
-};
-
-export const usersStartLoading = () => {
+export const startChecking = () => {
   return async (dispatch) => {
-    const resp = await fetchConToken(`auth/`, "GET");
+    const resp = await fetchConToken("auth/renew", "GET");
     const body = await resp.json();
 
-    dispatch(usersLoaded(body.listOfUsers));
+    if (body.ok) {
+      localStorage.setItem("token", body.token);
+      localStorage.setItem("token-init-date", new Date().getTime());
+
+      dispatch(login(body.user));
+    } else {
+      dispatch(checkingFinish());
+    }
   };
 };
-
-export const usersLoaded = (users) => ({
-  type: types.usersLoaded,
-  payload: users,
-});
-
-export const selectedUser = (selectedUser) => ({
-  type: types.selectedUser,
-  payload: selectedUser,
+const login = (user) => {
+  return {
+    type: types.login,
+    payload: {
+      user,
+    },
+  };
+};
+const logout = () => {
+  return {
+    type: types.logout,
+  };
+};
+const checkingFinish = () => ({
+  type: types.checkingFinish,
 });
