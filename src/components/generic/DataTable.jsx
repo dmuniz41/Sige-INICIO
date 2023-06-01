@@ -135,7 +135,7 @@ export const DataTable = ({ data, columns }) => {
           <FaAngleDoubleRight />
         </button>
         <span>
-          Página
+          Página 
           <strong>
             {pageIndex + 1} de {pageOptions.length}
           </strong>

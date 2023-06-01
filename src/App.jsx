@@ -9,7 +9,7 @@ function App() {
     <Provider store={store}>
       <BrowserRouter>
         <ProSidebarProvider>
-          <AppRouter />;
+          <AppRouter />
         </ProSidebarProvider>
       </BrowserRouter>
     </Provider>
