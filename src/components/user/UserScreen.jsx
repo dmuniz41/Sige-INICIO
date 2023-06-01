@@ -1,10 +1,11 @@
 import { useEffect } from "react";
-import { ListOfUsers } from "./ListOfUsers";
 import { Routes, Route } from "react-router-dom";
+import { useDispatch } from "react-redux";
+
+import { ListOfUsers } from "./ListOfUsers";
 import { AddUser } from "./AddUser";
 import { EditUser } from "./EditUser";
-import { usersStartLoading } from "../../actions/auth.js";
-import { useDispatch } from "react-redux";
+import { usersStartLoading } from "../../actions/users";
 
 export const UserScreen = () => {
   const dispatch = useDispatch();

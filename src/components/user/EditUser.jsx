@@ -1,15 +1,16 @@
 import React, { useEffect, useState } from "react";
+import Swal from "sweetalert2";
+
 import { SectionHeder } from "../generic/SectionHeder";
 import { useForm } from "../../hooks/useForm";
 import { useNavigate } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
-import { startUserUpdate, usersStartLoading } from "../../actions/auth";
-import Swal from "sweetalert2";
+import { startUserUpdate, usersStartLoading } from "../../actions/users";
 
 export const EditUser = () => {
   const dispatch = useDispatch();
   const navigate = useNavigate();
-  const { selectedUser } = useSelector((state) => state.auth);
+  const { selectedUser } = useSelector((state) => state.user);
 
   const [listOfPrivileges, setListOfPrivileges] = useState(selectedUser.privileges);
 

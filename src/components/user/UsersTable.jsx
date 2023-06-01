@@ -1,15 +1,16 @@
 import React, { useEffect, useState } from "react";
+import { Link } from "react-router-dom";
 import { useMemo } from "react";
-import { DataTable } from "../generic/DataTable";
 import { FaPlus, FaEdit, FaTrashAlt, FaFlag, FaRedo, FaSearch } from "react-icons/fa";
 import { useDispatch, useSelector } from "react-redux";
-import { Link } from "react-router-dom";
-import { startDeleteUser, usersStartLoading } from "../../actions/auth";
+
+import { DataTable } from "../generic/DataTable";
+import { startDeleteUser, usersStartLoading } from "../../actions/users";
 
 export const UsersTable = () => {
   const dispatch = useDispatch();
-  const { users } = useSelector((state) => state.auth);
-  const { selectedUser } = useSelector((state) => state.auth);
+  const { users } = useSelector((state) => state.user);
+  const { selectedUser } = useSelector((state) => state.user);
   const { user } = selectedUser;
 
   const data = useMemo(() => users, [users]);

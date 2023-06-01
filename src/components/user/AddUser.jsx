@@ -1,10 +1,11 @@
 import React, { useEffect, useState } from "react";
+import Swal from "sweetalert2";
+
 import { SectionHeder } from "../generic/SectionHeder";
 import { useForm } from "../../hooks/useForm";
 import { useNavigate } from "react-router-dom";
-import Swal from "sweetalert2";
 import { useDispatch } from "react-redux";
-import { startAddUser, usersStartLoading } from "../../actions/auth";
+import { startAddUser, usersStartLoading } from "../../actions/users";
 
 export const AddUser = () => {
   const dispatch = useDispatch();

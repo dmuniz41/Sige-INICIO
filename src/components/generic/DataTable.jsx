@@ -1,11 +1,12 @@
 import React, { useState } from "react";
+import { useEffect } from "react";
+import { useDispatch } from "react-redux";
 import { useSortBy, useTable, usePagination, useRowSelect } from "react-table";
 import { ScopedCssBaseline, Table, TableBody, TableCell, TableHead, TableRow } from "@mui/material";
-import { MdArrowUpward, MdArrowDownward } from "react-icons/md/";
 import { FaAngleDoubleRight, FaAngleDoubleLeft, FaAngleRight, FaAngleLeft } from "react-icons/fa/";
-import { useDispatch } from "react-redux";
-import { useEffect } from "react";
-import { selectedUser } from "../../actions/auth";
+import { MdArrowUpward, MdArrowDownward } from "react-icons/md/";
+
+import { selectedUser } from "../../actions/users";
 
 const PAGE_SIZES = [10, 20, 30, 40];
 
